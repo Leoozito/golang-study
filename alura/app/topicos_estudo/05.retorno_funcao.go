@@ -1,12 +1,14 @@
+// Esse arquivo mostra: funcionamento de retornar mais de uma coisa em uma função e como receber mais de uma coisa que a função está retornando.
+
 package main
 
 import (
 	"fmt"
-	"os"
 	"net/http"
+	"os"
 )
 
-func main () {
+func main() {
 
 	exibeIntroducao()
 	exibeMenu()
@@ -17,15 +19,15 @@ func main () {
 	comando := leComando()
 
 	switch comando {
-		case 1:
-			iniciarMonitoramento()
-		case 2:
-			fmt.Println("Exibindo Logs...")
-		case 0:
-			fmt.Println("Saindo do Programa !")
-			os.Exit(0)
-		default:
-			fmt.Println("Comando invalido")
+	case 1:
+		iniciarMonitoramento()
+	case 2:
+		fmt.Println("Exibindo Logs...")
+	case 0:
+		fmt.Println("Saindo do Programa !")
+		os.Exit(0)
+	default:
+		fmt.Println("Comando invalido")
 	}
 }
 
@@ -48,14 +50,13 @@ func exibeMenu() {
 	fmt.Println("0- Sair do Programa")
 }
 
-// a função vai receber apenas valor type int
 func leComando() int {
 	var comandoLido int
 	fmt.Scanf("%d", &comandoLido)
 
 	fmt.Println("O comando escolhido foi", comandoLido)
 
-	return comandoLido //para retornar para fora da função aquilo que eu consegui ler
+	return comandoLido
 }
 
 func iniciarMonitoramento() {
@@ -63,4 +64,10 @@ func iniciarMonitoramento() {
 	site := "https://www.alura.com.br"
 	resp, _ := http.Get(site)
 	fmt.Println(resp)
+
+	if resp.StatusCode == 200 {
+		fmt.Println("Site", site, "foi carregado com sucesso")
+	} else {
+		fmt.Println("Site", site, "esta com problemas. StatusCode:", resp.StatusCode)
+	}
 }
