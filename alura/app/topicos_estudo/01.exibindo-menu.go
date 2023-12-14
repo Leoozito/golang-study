@@ -1,3 +1,5 @@
+// Este arquivo mostra: Sobre o "print" e "scan" (que armazena dados que são informados)
+
 package main
 
 import "fmt"
