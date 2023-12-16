@@ -44,14 +44,19 @@ func get_comando() int {
 
 func iniciarMonitoramento() {
 	fmt.Println("Iniciando monitoramento...")
-	site := "https://httpbin.org/status/404" // ou 200
-	resp, _ := http.Get(site)
+	sites := []string{"https://random-status-code.herokuapp.com/",
+		"https://www.alura.com.br", "https://www.caelum.com.br"}
 
-	if resp.StatusCode == 200 {
-		fmt.Println("Site em funcionamento, status: ", resp.StatusCode)
-		fmt.Println("----------------------------------")
-	} else {
-		fmt.Println("Erro, status: ", resp.StatusCode)
-		fmt.Println("----------------------------------")
+	for _, site := range sites {
+		resp, _ := http.Get(site)
+
+		if resp.StatusCode == 200 {
+			fmt.Println("Site: ", site, " em funcionamento, status: ", resp.StatusCode)
+			fmt.Println("----------------------------------")
+		} else {
+			fmt.Println("Site: ", site, "status: ", resp.StatusCode, "ERROR")
+			fmt.Println("----------------------------------")
+		}
 	}
+
 }
