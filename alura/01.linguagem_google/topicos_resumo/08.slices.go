@@ -21,10 +21,10 @@ func working_with_slices() []string {
 
 	fmt.Scanln(&data)
 	slice = append(slice, data)
-
+	fmt.Println(" ")
+	fmt.Println("----------------------------------------------------")
 	fmt.Println("Dados do slice: ", slice)
 	fmt.Println("Quantidade armazenada: ", len(slice))
-	fmt.Println("----------------------------------------------------")
 
 	question_continue()
 
@@ -50,5 +50,11 @@ func question_continue() {
 	switch resp {
 	case 0:
 		os.Exit(0)
+	case 1:
+		main()
+	default:
+		fmt.Println("Comando indefinido, escolha entre as opções apresentadas")
+		main()
 	}
+
 }
