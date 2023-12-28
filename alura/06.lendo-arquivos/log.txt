@@ -1,5 +1,0 @@
-site-falso- online: false truesite-falso- online: false
-www.globo.com.br- online: true
-14/12/2022 10:13:33www.globo.com.br- online: true
-14/12/2022 10:44:37www.globo.com.br- online: true
-14/12/2022 10:45:21www.globo.com.br- online: true

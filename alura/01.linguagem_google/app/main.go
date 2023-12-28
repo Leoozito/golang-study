@@ -46,8 +46,7 @@ func get_comando() int {
 }
 
 func iniciarMonitoramento() {
-	sites := []string{"https://random-status-code.herokuapp.com/",
-		"https://www.alura.com.br", "https://www.caelum.com.br"}
+	sites := read_file()
 
 	for i := 0; i < monitoramentos; i++ {
 		fmt.Println("Iniciando monitoramento...")
@@ -59,7 +58,11 @@ func iniciarMonitoramento() {
 }
 
 func tests_sites(site string) {
-	resp, _ := http.Get(site)
+	resp, err := http.Get(site)
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro: ", err)
+	}
 
 	if resp.StatusCode == 200 {
 		fmt.Println("Site: ", site, " em funcionamento, status: ", resp.StatusCode)
@@ -68,4 +71,17 @@ func tests_sites(site string) {
 		fmt.Println("Site: ", site, "status: ", resp.StatusCode, "ERROR")
 		fmt.Println("")
 	}
+}
+
+// lê todos os sites contidos dentro do arquivo
+func read_file() []string {
+	var sites []string
+
+	arquivo, err := os.Open("sites.txt")
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro: ", err)
+	}
+
+	return sites
 }
