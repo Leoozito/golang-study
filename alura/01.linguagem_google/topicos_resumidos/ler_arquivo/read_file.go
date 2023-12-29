@@ -8,17 +8,22 @@ import (
 )
 
 func main() {
-	var resp int
-	fmt.Println("Ver o funcionamento da biblioteca")
-	fmt.Println("1. Ioutil")
-	fmt.Println("2. Bufio")
-	fmt.Scan(&resp)
+	resp := menu()
 
 	if resp == 1 {
 		retorna_nomes_file()
 	} else {
 		retorna_alguns_nomes()
 	}
+}
+
+func menu() int {
+	var resp int
+	fmt.Println("Ver o funcionamento da biblioteca")
+	fmt.Println("1. Ioutil")
+	fmt.Println("2. Bufio")
+	fmt.Scan(&resp)
+	return resp
 }
 
 func retorna_nomes_file() []string {

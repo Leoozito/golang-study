@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http" // pacote do go responsavel por fazer acesso web
 	"os"
+	"strings"
 	"time"
 )
 
@@ -68,7 +71,7 @@ func tests_sites(site string) {
 		fmt.Println("Site: ", site, " em funcionamento, status: ", resp.StatusCode)
 		fmt.Println("")
 	} else {
-		fmt.Println("Site: ", site, "status: ", resp.StatusCode, "ERROR")
+		fmt.Println("Site: ", site, ", status: ", resp.StatusCode, "ERROR")
 		fmt.Println("")
 	}
 }
@@ -77,11 +80,25 @@ func tests_sites(site string) {
 func read_file() []string {
 	var sites []string
 
-	arquivo, err := os.Open("sites.txt")
-
+	arquivo, err := os.Open("sites.txt") // abrimos o arquivo para ser lido
 	if err != nil {
 		fmt.Println("Ocorreu um erro: ", err)
 	}
+
+	leitor := bufio.NewReader(arquivo)
+	for { // loop para poder ler o arquivo o inteiro [...]
+
+		dados, err := leitor.ReadString('\n') // [...] batendo em todas as quebras de linhas que o arquivo tiver
+
+		if err == io.EOF { // quando terminar de ler o arquivo inteiro
+			break // para a repetição
+		}
+
+		dados = strings.TrimSpace(dados) // tirando espaços, para não serem adicionado na lista
+		sites = append(sites, dados)
+	}
+
+	arquivo.Close()
 
 	return sites
 }
