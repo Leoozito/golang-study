@@ -8,13 +8,14 @@ import (
 )
 
 func main() {
+	slice := []string{}
+
 	for {
-		working_with_slices()
+		slice = working_with_slices(slice)
 	}
 }
 
-func working_with_slices() []string {
-	slice := []string{}
+func working_with_slices(slice []string) []string {
 	var data string
 
 	apresentation()
@@ -26,7 +27,7 @@ func working_with_slices() []string {
 	fmt.Println("Dados do slice: ", slice)
 	fmt.Println("Quantidade armazenada: ", len(slice))
 
-	question_continue()
+	question_continue(slice)
 
 	return slice
 }
@@ -38,23 +39,24 @@ func apresentation() {
 	fmt.Println(" ")
 }
 
-func question_continue() {
+func question_continue(slice []string) {
 	fmt.Println(" ")
 	fmt.Println("Quer continuar?")
 	fmt.Println("1 - Sim")
 	fmt.Println("0 - Não")
 	fmt.Println(" ")
 
-	var resp int
+	var resp string
 	fmt.Scan(&resp)
 	switch resp {
-	case 0:
+	case "0":
+		fmt.Println("Saindo ...")
 		os.Exit(0)
-	case 1:
-		main()
+	case "1":
+		working_with_slices(slice)
 	default:
 		fmt.Println("Comando indefinido, escolha entre as opções apresentadas")
-		main()
+		question_continue(slice)
 	}
 
 }
