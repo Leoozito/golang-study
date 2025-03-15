@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"net/http" // pacote do go responsavel por fazer acesso web
+	"net/http" // pacote do go responsavel por fazer requisições web - GET, PSOT
 	"os"
 	"strings"
 	"time"

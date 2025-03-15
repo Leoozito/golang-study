@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
-	//  no GO não tem "WHILE", ou seja, usando o for pode se fazer loop infinito
+
+	// no GO não tem "WHILE", então utilizamos o FOR
+	// e quando passamos o FOR sem nada, ele vira um loop infinito 
 	for {
 		exibeMenu()
 
