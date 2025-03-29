@@ -133,5 +133,5 @@ func showLogs() {
 		fmt.Println(err)
 	}
 
-	fmt.Println(arquivo)
+	fmt.Println(string(arquivo))
 }
