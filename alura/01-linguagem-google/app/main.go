@@ -4,8 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http" // pacote do go responsavel por fazer requisições web - GET, PSOT
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -16,13 +18,14 @@ const monitoramentos = 3
 func main() {
 	for {
 		menu()
-		comando := get_comando()
+		comando := getComand()
 
 		switch comando {
 		case 1:
-			iniciarMonitoramento()
+			startMonitoring()
 		case 2:
 			fmt.Println("Exibindo logs: ")
+			showLogs()
 		case 0:
 			fmt.Println("Saindo do programa")
 			os.Exit(0)
@@ -40,7 +43,7 @@ func menu() {
 	fmt.Println("")
 }
 
-func get_comando() int {
+func getComand() int {
 	var comando int
 	fmt.Scan(&comando)
 	fmt.Println("Comando: [", comando, "] escolhido...")
@@ -48,19 +51,19 @@ func get_comando() int {
 	return comando
 }
 
-func iniciarMonitoramento() {
-	sites := read_file()
+func startMonitoring() {
+	sites := readFile()
 
 	for i := 0; i < monitoramentos; i++ {
 		fmt.Println("Iniciando monitoramento...")
 		for _, site := range sites {
-			tests_sites(site)
+			testsSites(site)
 		}
 		time.Sleep(delay * time.Second)
 	}
 }
 
-func tests_sites(site string) {
+func testsSites(site string) {
 	resp, err := http.Get(site)
 
 	if err != nil {
@@ -77,7 +80,7 @@ func tests_sites(site string) {
 }
 
 // lê todos os sites contidos dentro do arquivo
-func read_file() []string {
+func readFile() []string {
 	var sites []string
 
 	arquivo, err := os.Open("sites.txt") // abrimos o arquivo para ser lido
@@ -101,4 +104,34 @@ func read_file() []string {
 	arquivo.Close()
 
 	return sites
+}
+
+func writeFile(site string, status bool) {
+	// define o arquivo para abrir, define que vai:
+	// os.O_RDWR -> abre o arquivo leitura/gravação.
+	// os.O_APPEND -> acrescenta dados ao arquivo ao gravar.
+	// os.O_CREATE -> cria um novo arquivo se nenhum existir. 
+	// 0666 -> codigo de permissão do arquivo
+	arquivo, err := os.OpenFile("log.txt", os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	arquivo.WriteString(
+		time.Now().Format("02/01/2006 15:04:05") + 
+		" - " + site + "- online: " + 
+		strconv.FormatBool(status) + "\n")
+
+	arquivo.Close()
+}
+
+func showLogs() {
+	arquivo, err := ioutil.ReadFile("log.txt")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(arquivo)
 }

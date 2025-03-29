@@ -5,23 +5,42 @@ package main
 import (
 	"fmt"
 	"os"
+	"reflect"
 )
 
 func main() {
+	// define o SLICE
+	var array [4]string
 	slice := []string{}
 
 	for {
 		slice = working_with_slices(slice)
 	}
+
+	// resultado do tipo do slice : []string
+	fmt.Println(reflect.TypeOf(slice))
+
+	// resultado do tipo do array : [4]string
+	fmt.Println(reflect.TypeOf(array))
+
+	// resultado do tamanho do array
+	fmt.Println("Tamanho do array: ",len(array))
+
+	// resultado do tamanho do slice
+	fmt.Println("Tamanho do slice: ", len(slice))
 }
 
+// recebe e retorna uma slice
 func working_with_slices(slice []string) []string {
 	var data string
 
 	apresentation()
 
 	fmt.Scanln(&data)
+
+	// adiciona dados ao slice
 	slice = append(slice, data)
+
 	fmt.Println(" ")
 	fmt.Println("----------------------------------------------------")
 	fmt.Println("Dados do slice: ", slice)
@@ -47,7 +66,9 @@ func question_continue(slice []string) {
 	fmt.Println(" ")
 
 	var resp string
+
 	fmt.Scan(&resp)
+
 	switch resp {
 	case "0":
 		fmt.Println("Saindo ...")

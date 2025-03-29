@@ -1,6 +1,6 @@
 ## Ler arquivos em GO
 
-No arquivo *read_file.go* mostra o funcionamento das bibliotecas apresentadas no curso, que ajudam a ler arquivos de forma diferentes
+No arquivo *read_file.go* mostra o funcionamento das bibliotecas, que ajudam a ler arquivos de forma diferentes
 
 ### Bibliotecas utilizadas
 
