@@ -1,8 +1,8 @@
 package model
 
-type Aluno struct {
+type Student struct {
 	Id string `json:"id"`
 	Name string `json:"name"`
 }
 
-var Alunos []Aluno
+var Students []Student

@@ -7,7 +7,8 @@ import (
 
 func Initialize() {
 	r := gin.Default()
-	r.GET("/alunos", controller.GetAlunos)
-	r.GET("/alunos/:id", controller.GetAlunoById)
-	r.Run("8000")
+	r.GET("/students", controller.GetStudents)
+	r.GET("/student/:id", controller.GetStudentById)
+	r.POST("/student", controller.CreateStudent)
+	r.Run(":8000")
 }

@@ -22,5 +22,5 @@ func ConnectDB() {
 		log.Fatal("Erro ao conectar com o banco de dados")
 	}
 
-	DB.AutoMigrate(&model.Aluno{})
+	DB.AutoMigrate(&model.Student{})
 }
