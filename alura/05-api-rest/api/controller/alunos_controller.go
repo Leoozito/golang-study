@@ -15,11 +15,17 @@ func GetStudents(c *gin.Context) {
 }
 
 func GetStudentById(c *gin.Context) {
+	var student model.Student
 	id := c.Params.ByName("id")
-	
-	c.JSON(200, gin.H{
-		"id": id,
-	})
+	database.DB.First(&student, id)	
+
+	if student.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"Not Found": "Aluno não encontrado"})
+		return
+	}
+
+	c.JSON(http.StatusOK, student)
 }
 
 func CreateStudent(c *gin.Context) {
