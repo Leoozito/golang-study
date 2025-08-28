@@ -129,7 +129,7 @@ type User struct {
 	gorm.Model
 	Name string
 }
-// gorm.Model definition, equals:
+// gorm.Model definition, EQUALS:
 type Model struct {
   ID        uint           `gorm:"primaryKey"`
   CreatedAt time.Time
@@ -145,7 +145,8 @@ Guarda uma série de informações só de colocar o "gorm.Model"
 
 --- 
 
-Com o **AutoMigrate( )** do GORM conseguimos criar uma tabela com base na struct que definirmos
+Com o **AutoMigrate( )** do GORM conseguimos criar uma tabela com base na struct que definirmos e como o nome ja diz, fazer uma auto migração.
+Os modelos são criados no banco de dados utilizando como base os dados acessados a partir da referência de memória de uma ou mais structs que são passadas como parâmetro para o método db.AutoMigrate.
 
 ```go
 import (
